@@ -11,7 +11,7 @@ SBSLMM uses the block information. Reference: [Berisa and Pickrell (2015)](https
 - Linkage Disequilibrium SCore regression (LDSC) <br>
 SBSLMM uses the estimated heritability. You can use any sofeware to estimate the heritability, such as [LDSC](https://github.com/bulik/ldsc), [GEMMA](https://github.com/genetics-statistics/GEMMA) and [GCTB](http://cnsgenomics.com/software/gctb/#SummaryBayesianAlphabet). <br>
 In the paper, we use LDSC to estimate heritability. Here is the code: 
-````bash
+````shell
 ##
 ldsc=/net/mulan/home/yasheng/Biobank/program/ldsc/ldsc.py
 ## 
