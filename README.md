@@ -15,7 +15,7 @@ In the paper, we use LDSC to estimate heritability. Here is the code:
 py=/net/mulan/home/yasheng/py3/bin/python
 ldsc=/net/mulan/home/yasheng/Biobank/program/ldsc/ldsc.py
 summ=/net/mulan/disk2/yasheng/GWAS/summary_pheno${PHENO}
-ref=/net/mulan/disk2/yasheng/sample2000/ldsc/
+ref=/net/mulan/disk2/yasheng/sample500/ldsc/
 herit=/net/mulan/disk2/yasheng/GWAS/heritability/h2_pheno${PHENO}
 ## LDSC
 ${py} ${ldsc} --h2 ${summ}.ldsc.gz --ref-ld-chr ${ref} --w-ld-chr ${ref} --out ${herit}
