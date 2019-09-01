@@ -7,6 +7,6 @@ SBSLMM uses PLINK to select independent large effect SNPs. The link of Plink-1.9
 - sbslmm <br>
 SBSLMM uses sbslmm to re-restiamte the marginal effect (z-score). The executable file of sbslmm is included in the file folder SBSLMM.
 - block file <br>
-
+SBSLMM uses the block information. Reference: [Berisa and Pickrell (2015)](https://academic.oup.com/bioinformatics/article/32/2/283/1743626/Approximately-independent-linkage-disequilibrium)
 - LDSC <br>
 
