@@ -9,7 +9,7 @@ SBSLMM uses sbslmm to re-restiamte the marginal effect (z-score). The executable
 - block file <br>
 SBSLMM uses the block information. Reference: [Berisa and Pickrell (2015)](https://academic.oup.com/bioinformatics/article/32/2/283/1743626/Approximately-independent-linkage-disequilibrium)
 - Linkage Disequilibrium SCore regression (LDSC) <br>
-SBSLMM uses the estimated heritability. You can use any sofeware to estimate the heritability, such as [LDSC] (https://github.com/bulik/ldsc), [GEMMA] (https://github.com/genetics-statistics/GEMMA) and [GCTB] (http://cnsgenomics.com/software/gctb/#SummaryBayesianAlphabet). <br>
+SBSLMM uses the estimated heritability. You can use any sofeware to estimate the heritability, such as [LDSC](https://github.com/bulik/ldsc), [GEMMA](https://github.com/genetics-statistics/GEMMA) and [GCTB](http://cnsgenomics.com/software/gctb/#SummaryBayesianAlphabet). <br>
 In the paper, we use LDSC to estimate heritability. Here is the code: 
 ````bash
 ##
