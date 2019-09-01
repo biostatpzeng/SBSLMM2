@@ -12,14 +12,13 @@ SBSLMM uses the block information. Reference: [Berisa and Pickrell (2015)](https
 SBSLMM uses the estimated heritability. You can use any sofeware to estimate the heritability, such as [LDSC](https://github.com/bulik/ldsc), [GEMMA](https://github.com/genetics-statistics/GEMMA) and [GCTB](http://cnsgenomics.com/software/gctb/#SummaryBayesianAlphabet). <br>
 In the paper, we use LDSC to estimate heritability. Here is the code: 
 ````shell
-##
+py=/net/mulan/home/yasheng/py3/bin/python
 ldsc=/net/mulan/home/yasheng/Biobank/program/ldsc/ldsc.py
-## 
 summ=/net/mulan/disk2/yasheng/GWAS/summary_pheno${PHENO}
 ref=/net/mulan/disk2/yasheng/sample2000/ldsc/
 herit=/net/mulan/disk2/yasheng/GWAS/heritability/h2_pheno${PHENO}
 ## LDSC
-python ${ldsc} --h2 ${summ}.ldsc.gz --ref-ld-chr ${ref} --w-ld-chr ${ref} --out ${herit}
+${py} ${ldsc} --h2 ${summ}.ldsc.gz --ref-ld-chr ${ref} --w-ld-chr ${ref} --out ${herit}
 rm ${summ}.ldsc.gz
 ## get herit
 hstr=`sed -n '26p' ${herit}`
