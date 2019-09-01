@@ -3,5 +3,10 @@
 
 ### Installaiton
 - PLINK <br>
-SBSLMM uses PLINK to select independent large effect SNPs. The link of Plink-1.9: https://www.cog-genomics.org/plink/1.9/
+SBSLMM uses PLINK to select independent large effect SNPs. The link of Plink-1.9: https://www.cog-genomics.org/plink/1.9/.
+- sbslmm <br>
+SBSLMM uses sbslmm to re-restiamte the marginal effect (z-score). The executable file of sbslmm is included in the file folder SBSLMM.
+- block file <br>
+
+- LDSC <br>
 
