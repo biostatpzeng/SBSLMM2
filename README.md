@@ -132,8 +132,8 @@ r21=/net/mulan/disk2/yasheng/simulation2/SLMM/PT/r2_block${block}_her${herit}_cr
 Rscript ${simpred} --pheno ${pred1}.profile --r2 ${r21}_p${p}.txt
 rm ${pred1}.profile
 done
-pbestf1=/net/mulan/disk2/yasheng/simulation2/SLMM/PT/pbest1_block${block}_her${herit}_cross${cross}_dist${dist}_ps${ps}_prop${prop}
-pbestf2=/net/mulan/disk2/yasheng/simulation2/SLMM/PT/pbest2_block${block}_her${herit}_cross${cross}_dist${dist}_ps${ps}_prop${prop}
+pbestf1=/path/pbest1
+pbestf2=/path/pbest2
 Rscript ${max1} --r2 ${r21}_p --pbest1 ${pbestf1}.txt --pbest2 ${pbestf2}.txt
 pbest1=`cat ${pbestf1}.txt`
 pbest2=`cat ${pbestf2}.txt`
@@ -146,6 +146,26 @@ rm ${pred2}.txt
 rm ${clump1}*
 ````
 - SBLUP
+SBLUP is performed by GCTA. The code is similar to the example of GCTA. 
+````shell
+bfiletr=/path/train
+summf=/path/summary_statistics_from_gemma
+refld=/path/ref
+herit=0.1
+m=`cat ${summf}.assoc.txt | wc -l`
+n=`cat ${bfiletr}.fam | wc -l`
+cojo=$(echo "${m}*(1/${herit}-1)" | bc -l)
+awk '{print $2,$6,$7,$8,$9,$10,$11,$5}' ${summf}.assoc.txt > ${summf}.ma
+sed -i '1i\SNP A1 A2 freq b se p N' ${summf}.ma
+est3=/path/esteff
+${gcta} --bfile ${refld} --chr 1 --cojo-file ${summf}.ma --cojo-sblup ${cojo} --cojo-wind 200 --thread-num ${thread} --out ${est3}
+pred3=/path/pheno
+plink-1.9 --bfile ${bfilete} --score ${est}.sblup.cojo 1 2 4 sum --out ${pred3}
+rm ${est3}.log
+rm ${est3}*badsnps
+rm ${est3}.sblup.cojo
+rm ${pred3}.log
+````
 - LDpred
 - lasso (sample size = 2,000)
 - BSLMM (sample size = 2,000)
