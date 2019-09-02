@@ -267,6 +267,3 @@ We delete the SNPs with HWE<1e-7.
 We delete the SNPS with Pm>0.05.
 #### Sample QC
 We use `mkpheno.R` to select the samples. The details are shown in the manuscript.<br>
-![Flow chat](https://github.com/biostat0903/SBSLMM2/master/flow/clean.tiff)
-
-
