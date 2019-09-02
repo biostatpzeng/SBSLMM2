@@ -80,7 +80,30 @@ The details is:
 		INPUT: the number of threads
 ````
 ### Output file format
-
+The example of output file is: 
+````
+rs559141705 G -0.0686326 -0.220596 1
+rs116836856 T 0.0825543 0.160458 1
+rs139791561 T -0.0339878 -0.0541334 1
+rs80205519 A 0.0170505 0.057553 1
+rs114747222 A -0.106633 -0.399451 1
+rs1357783 A 0.114697 0.163234 1
+rs7543904 C 0.0425442 0.0673737 1
+rs1202804 A 0.0691282 0.111027 1
+rs1749778 C 0.10026 0.144773 1
+rs12024338 C 0.105702 0.150094 1
+rs991302 C 0.0612944 0.132898 1
+````
+The first column is SNP ID. The second column is allele code. The third code is scaled effect size. The forth is non-scaled effect size. Here, we use the MAF from the summary data. You can also use the testing data to transfer it. The fifth column is the index of whether it is large effect or not (1: large effect, 0: small effect). You can directly use the output file to plink-1.9. The code is: 
+````shell
+bfilete=path/test
+est=path/est_SBSLMM.txt
+pred=path/pheno_pred.txt
+## plink 1.9
+plink-1.9 --bfile ${bfilete} --score ${est}.txt 1 2 4 sum --out ${pred}
+## plink 2
+plink-1.9 --bfile ${bfilete} --score ${est}.txt 1 2 4 cols=+scoresums --out ${pred}
+````
 ### Simulation
 - P+T
 - SBLUP
