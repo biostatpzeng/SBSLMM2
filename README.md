@@ -105,7 +105,7 @@ plink-1.9 --bfile ${bfilete} --score ${est}.txt 1 2 4 sum --out ${pred}
 plink-1.9 --bfile ${bfilete} --score ${est}.txt 1 2 4 cols=+scoresums --out ${pred}
 ````
 ### Simulation
-- P+T
+- P+T <br>
 To select the best cutoff, we ues a validate data to do P+T. We use the plink-1.9. The `toplinkf`, `clumpf`, `simPred` and `max` functions are in `PT` folder. Here, the code is as following: 
 ````shell
 toplinkf=~/PT/toplinkf.R
@@ -145,7 +145,7 @@ rm ${pred1}.txt
 rm ${pred2}.txt
 rm ${clump1}*
 ````
-- SBLUP
+- SBLUP <br>
 SBLUP is performed by GCTA. The code is similar to the example of GCTA. 
 ````shell
 bfiletr=/path/train
@@ -214,7 +214,7 @@ rm ${predp4}.nopred
 rm ${predp4}.log
 rm ${r24}*
 ````
-- lassosum
+- lassosum <br>
 We use the lassosum by the R package `lassosum`. The 'lassosum' function is in the `lassosum` file folder. 
 ````shell
 res5=/net/mulan/disk2/yasheng/simulation_bslmm/SLMM/lassosum/res_block${block}_her${herit}_cross${cross}_dist${dist}_ps${ps}_prop${prop}
