@@ -143,4 +143,7 @@ system(paste0(opt$sbslmm, " -s ", opt$tmpPath, "s_", prefix_file, ".txt",
                           " -h ", opt$h2,
                           " -t ", opt$thread,
                           " -eff ", opt$outPath, prefix_file, ".txt"))
-system(paste0("rm ", opt$tmpPath))
+system(paste0("rm ", opt$tmpPath, "l_", prefix_file, ".txt"))
+system(paste0("rm ", opt$tmpPath, "s_", prefix_file, ".txt"))
+system(paste0("rm ", opt$tmpPath, "l_", prefix_file, ".clumped"))
+system(paste0("rm ", opt$tmpPath, "l_", prefix_file, ".log"))
