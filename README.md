@@ -25,7 +25,10 @@ hstr=`sed -n '26p' ${herit}`
 hse=`echo ${hstr#*:}`
 h2=`echo ${hse%(*}`
 ````
-- SBSLMM requires the following R packages: data.table, Matrix. Install them by: <br>
+- SBSLMM requires the following R packages: data.table, optparse. Install them by: <br>
+````R
+install.packages(c("data.table", "optparse"), dependencies=TRUE)
+````
 ### Input file format
 - summary statistics (GEMMA format)
 | CHROM | GeneStart | GeneEnd | TargetID/GeneID | GeneName | sample1 | sample...|
