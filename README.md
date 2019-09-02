@@ -232,6 +232,7 @@ rm ${predt}.log
 rm ${esttr3}*
 ````
 - BSLMM (sample size = 2,000)<br>
+We use the BSLMM in the `GEMMA` software. 'bslmm.R' is in the 'simulation_small_size' file folder. 
 ````shell
 ## BSLMM
 gemma=/path/gemma-0.98-linux-static
@@ -251,7 +252,21 @@ rm ${predt}.log
 All the simulation result are included in the manuscript.
 
 ### UK Biobank data process
+For SBSLMM, we also process the UKB data. Following the Neale lab and official file of UKB, we perform qualtiy control of samples and SNPs. 
 #### SNP QC
+We use `snp_qc.R` and `toplink.sh` to perform the SNP QC. The details are shown in the manuscript.
+- MAF <br>
+We select SNPs with MAF>0.2. 
+- INFO score<br>
+We select the SNPs with INFO score>0.8. 
+- Duplicate<br>
+We delete the duplicated SNPs. 
+- HWE<br>
+We delete the SNPs with HWE<1e-7.
+- Missing rate<br>
+We delete the SNPS with Pm>0.05.
 #### Sample QC
+We use `mkpheno.R` to select the samples. The details are shown in the manuscript.
+
 
 
