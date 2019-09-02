@@ -114,7 +114,7 @@ simpred=/PT/simPred.R
 max=~/PT/max.R
 
 bfileval=/path/validate
-
+bfilete=/path/test
 ## transfer gemma format to plink format
 summf=/path/summary_statistics_from_gemma
 Rscript ${toplinkf} --gemma ${summf}.assoc.txt --plink ${summf}.plink.txt
@@ -167,7 +167,55 @@ rm ${est3}.sblup.cojo
 rm ${pred3}.log
 ````
 - LDpred
+LDpred is performed by manual of LDpred, including the cutoff and radius. 
+````shell
+bfiletr=/path/train
+bfileval=/path/validate
+bfilete=/path/test
+n=`cat ${bfiletr}.fam | wc -l`
+herit=0.1
+## transfer gemma format to LDpred format
+Rscript ${toldpred} --gemma ${summf}.assoc.txt  --ldpred ${summf}_LDpred.sumstat
+## validate
+coord1=/path/summary_cv.HDF5
+${py} ${ldpred} coord --gf ${bfileval} --ssf ${summf}_LDpred.sumstat --out ${coord1} --N ${n} --ssf-format STANDARD --max-freq-discrep 0.2
+ldest=/path/ld
+infest=/path/esteff
+${py} ${ldpred} gibbs --cf ${coord1} --ldr ${ldr} --ldf ${ldest} --out ${infest} --N ${n} --h2 ${herit} \
+--f 1 0.3 0.1 0.03 0.01 0.003 0.001 0.0003 0.0001 
+pred41=/path/pheno
+r24=/path/r2
+for p in 1.0000e+00 3.0000e-01 1.0000e-01 3.0000e-02 1.0000e-02 3.0000e-03 1.0000e-03 3.0000e-04 1.0000e-04;do
+plink-1.9 --bfile ${bfileval} --score ${infest}_LDpred_p${p}.txt 3 4 7 header sum --out ${pred41}_p${p}
+Rscript ${simpred} --pheno ${pred41}_p${p}.profile --r2 ${r24}_p${p}.txt
+rm ${pred41}_p${p}.log
+rm ${pred41}_p${p}.nopred
+rm ${pred41}_p${p}.profile
+done
+pbestf4=/path/r2_best.txt
+Rscript ${max2} --r2 ${r24}_p --pbest ${pbestf4} 
+pbest4=`cat ${pbestf4}`
+
+## test
+coord2=/path/summary_ref.HDF5
+${py} ${ldpred} coord --gf ${refld} --ssf ${summf}_LDpred.sumstat --out ${coord2} --N ${n} --ssf-format STANDARD --max-freq-discrep 0.2
+${py} ${ldpred} gibbs --cf ${coord2} --ldr ${ldr} --ldf ${ldest} --out ${infest} --N ${n} --h2 ${herit} --f ${pbest4}
+predInf4=/path/pheno_inf
+predp4=/path/pheno_pbest
+plink-1.9 --bfile ${bfilete} --score ${infest}_LDpred-inf.txt 3 4 7 sum --out ${predInf4}
+plink-1.9 --bfile ${bfilete} --score ${infest}_LDpred_p${pbest4}.txt 3 4 7 sum --out ${predp4}
+rm ${coord1}
+rm ${coord2}
+rm ${ldest}*.pkl.gz
+rm ${infest}_LDpred*.txt
+rm ${predInf4}.nopred
+rm ${predInf4}.log
+rm ${predp4}.nopred
+rm ${predp4}.log
+rm ${r24}*
+````
 - lasso (sample size = 2,000)
+We use the lasso 
 - BSLMM (sample size = 2,000)
 figure1 and figure 2
 
