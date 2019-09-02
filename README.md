@@ -45,8 +45,40 @@ chr rs ps n_mis n_obs allele1 allele0 af beta se p_wald
 The block information is download from the website: https://bitbucket.org/nygcresearch/ldetect-data/src/master/EUR/
 
 ### Parameter Setting and example code
-You can directly use the Rscript in the file folder `SBSLMM`.
-
+You can directly use the Rscript `/SBSLMM/SBSLMM.R`. You can get the explaination of each parameter: 
+````R
+Rscript SBSLMM.R -h
+Rscript SBSLMM.R --help
+````
+The details is: 
+````
+--summary=CHARACTER
+		INPUT: the summary statistics (gemma output format)
+--tmpPath=CHARACTER
+		INPUT: the temptorary path
+--outPath=CHARACTER
+		INPUT: the output path
+--plink=CHARACTER
+		INPUT: the perfix of Plink software
+--ref=CHARACTER
+		INPUT: the perfix of reference panel
+--r2=CHARACTER
+		INPUT: the cutoff of SNPs clumping (default:0.1)
+--pv=CHARACTER
+		INPUT: the cutoff of SNPs pruning (default:1e-6)
+--sbslmm=CHARACTER
+		INPUT: the perfix of sbslmm software
+--mafMax=CHARACTER
+		INPUT: the maximium of the difference between reference panel and summary data
+--nsnp=CHARACTER
+		INPUT: the number of SNPs in whole genome
+--block=CHARACTER
+		INPUT: the block information (Berisa and Pickrell 2015)
+--h2=CHARACTER
+		INPUT: the heritability of trait
+--thread=CHARACTER
+		INPUT: the number of threads
+````
 ### Output file format
 
 ### Simulation
