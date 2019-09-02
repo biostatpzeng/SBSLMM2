@@ -262,9 +262,10 @@ We select the SNPs with INFO score>0.8.
 - Duplicate<br>
 We delete the duplicated SNPs. 
 - HWE<br>
-We delete the SNPs with HWE<1e-7.
+We delete the SNPs with HWE<1e-6.
 - Missing rate<br>
 We delete the SNPS with Pm>0.05.
 #### Sample QC
 We use `mkpheno.R` to select the samples. The details are shown in the manuscript.<br>
+The flow chart is as following: 
 ![Flow Chart](https://github.com/biostat0903/SBSLMM2/blob/master/flow/clean2.png)
