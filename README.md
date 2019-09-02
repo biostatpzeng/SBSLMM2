@@ -249,7 +249,7 @@ rm ${snpeff2}*
 rm ${snpeff3}*
 rm ${predt}.log
 ````
-All the simulation result are included in the manuscript.
+All the simulation results are included in the manuscript.
 
 ### UK Biobank data process
 For SBSLMM, we also process the UKB data. Following the Neale lab and official file of UKB, we perform qualtiy control of samples and SNPs. 
