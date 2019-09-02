@@ -31,14 +31,21 @@ install.packages(c("data.table", "optparse"), dependencies=TRUE)
 ````
 ### Input file format
 - summary statistics (GEMMA format) <br>
-| CHROM | GeneStart | GeneEnd | TargetID/GeneID | GeneName | sample1 | sample...|
-|:-----:|:---------:|:-------:|:---------------:|:--------:|:-------:|:--------:|
-|   1   |    100    |   200   |     ENSG0000    |     X    |   0.2   |     ...  |
+The separate is tab (\t).
+````
+chr rs ps n_mis n_obs allele1 allele0 af beta se p_wald
+1	rs554763599	41975332	0	10000	A	G	0.476	1.768782e-03	1.731524e-02	9.186383e-01
+1	rs678110	41976017	0	10000	C	T	0.409	2.573095e-02	1.756221e-02	1.429165e-01
+1	rs72669005	41976217	110	9890	A	G	0.040	-7.861154e-02	4.424035e-02	7.561186e-02
+1	rs140839222	41976345	88	9912	C	T	0.027	-1.061644e-01	5.334030e-02	4.658253e-02
+1	rs377343544	41976500	0	10000	A	G	0.058	2.293323e-02	3.689809e-02	5.342658e-01
+1	rs11809423	41976529	0	10000	T	C	0.037	-6.884283e-02	4.559762e-02	1.311286e-01
+````
 - block information (.bed)
 The block information is download from the website: https://bitbucket.org/nygcresearch/ldetect-data/src/master/EUR/
 
 ### Parameter Setting and example code
-
+You can directly use the Rscript in the file folder `SBSLMM`.
 
 ### Output file format
 
