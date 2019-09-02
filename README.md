@@ -30,12 +30,28 @@ h2=`echo ${hse%(*}`
 install.packages(c("data.table", "optparse"), dependencies=TRUE)
 ````
 ### Input file format
-- summary statistics (GEMMA format)
+- summary statistics (GEMMA format) <br>
 | CHROM | GeneStart | GeneEnd | TargetID/GeneID | GeneName | sample1 | sample...|
 |:-----:|:---------:|:-------:|:---------------:|:--------:|:-------:|:--------:|
 |   1   |    100    |   200   |     ENSG0000    |     X    |   0.2   |     ...  |
 - block information (.bed)
+The block information is download from the website: https://bitbucket.org/nygcresearch/ldetect-data/src/master/EUR/
+
+### Parameter Setting and example code
+
 
 ### Output file format
 
+### Simulation
+- P+T
+- SBLUP
+- LDpred
+- lasso (sample size = 2,000)
+- BSLMM (sample size = 2,000)
+figure1 and figure 2
+
+### UK Biobank data process
+#### SNP QC
+#### Sample QC
+figure of process
 
