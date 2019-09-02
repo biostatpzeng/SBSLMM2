@@ -214,13 +214,44 @@ rm ${predp4}.nopred
 rm ${predp4}.log
 rm ${r24}*
 ````
-- lasso (sample size = 2,000)
-We use the lasso 
-- BSLMM (sample size = 2,000)
-figure1 and figure 2
+- lassosum
+We use the lassosum by the R package `lassosum`. The 'lassosum' function is in the `lassosum` file folder. 
+````shell
+res5=/net/mulan/disk2/yasheng/simulation_bslmm/SLMM/lassosum/res_block${block}_her${herit}_cross${cross}_dist${dist}_ps${ps}_prop${prop}
+Rscript ${lassosum} --summ ${summf}.assoc.txt --ref ${refld} --valid ${bfileva} --test ${bfilete} --res ${res5}.txt
+````
+- lasso (sample size = 2,000)<br>
+We use the lasso algorithm in Plink-1.9. The code is as following: 
+````shell
+## lasso
+esttr3=/path/train
+plink-1.9 --bfile ${bfiletr} --lasso ${herit} --out ${esttr3}
+predt=/path/pheno
+plink-1.9 --bfile ${bfilete} --score ${esttr3}.lasso 2 3 4 header sum --out ${predt}
+rm ${predt}.log
+rm ${esttr3}*
+````
+- BSLMM (sample size = 2,000)<br>
+````shell
+## BSLMM
+gemma=/path/gemma-0.98-linux-static
+bslmmc=/bslmm/bslmm.R
+cd /path
+snpeff1=snpeff
+${gemma} -bfile ${bfiletr} -bslmm 1 -o ${snpeff1} -w 6000 -s 2000 -rpace 1000
+snpeff2=/path/output/snpeff
+snpeff3=/path/snpeff
+Rscript ${bslmmc} --bim ${bfiletr}.bim --eff ${snpeff2}.param.txt --effc ${snpeff3}.txt
+predt=/path/pheno
+plink-1.9 --bfile ${bfilete} --score ${snpeff3}.txt 1 2 3 sum --out ${predt}
+rm ${snpeff2}*
+rm ${snpeff3}*
+rm ${predt}.log
+````
+All the simulation result are included in the manuscript.
 
 ### UK Biobank data process
 #### SNP QC
 #### Sample QC
-figure of process
+
 
