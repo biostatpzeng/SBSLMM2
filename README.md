@@ -96,9 +96,9 @@ rs991302 C 0.0612944 0.132898 1
 ````
 The first column is SNP ID. The second column is allele code. The third code is scaled effect size. The forth is non-scaled effect size. Here, we use the MAF from the summary data. You can also use the testing data to transfer it. The fifth column is the index of whether it is large effect or not (1: large effect, 0: small effect). You can directly use the output file to plink-1.9. The code is: 
 ````shell
-bfilete=path/test
-est=path/est_SBSLMM.txt
-pred=path/pheno_pred.txt
+bfilete=/path/test
+est=/path/est_SBSLMM.txt
+pred=/path/pheno_pred.txt
 ## plink 1.9
 plink-1.9 --bfile ${bfilete} --score ${est}.txt 1 2 4 sum --out ${pred}
 ## plink 2
@@ -106,6 +106,45 @@ plink-1.9 --bfile ${bfilete} --score ${est}.txt 1 2 4 cols=+scoresums --out ${pr
 ````
 ### Simulation
 - P+T
+To select the best cutoff, we ues a validate data to do P+T. We use the plink-1.9. The `toplinkf`, `clumpf`, `simPred` and `max` functions are in `PT` folder. Here, the code is as following: 
+````shell
+toplinkf=~/PT/toplinkf.R
+clumpf=~/PT/toclumpf.R
+simpred=/PT/simPred.R
+max=~/PT/max.R
+
+bfileval=/path/validate
+
+## transfer gemma format to plink format
+summf=/path/summary_statistics_from_gemma
+Rscript ${toplinkf} --gemma ${summf}.assoc.txt --plink ${summf}.plink.txt
+## 
+clump1=/path/summary
+pred1=/path/pheno
+for p in 5e-8 1e-6 1e-4 1e-3 1e-2 5e-2 1e-1 2e-1 5e-1 1.0; do 
+Rscript ${clumpf1} --gemma ${summf}.assoc.txt --plink ${summf}.plink.txt --ref ${bfileval} --pth ${p} \
+--clump ${clump1}_p${p} --pred ${pred1}
+rm ${clump1}_p${p}.clumped
+rm ${clump1}_p${p}.log
+rm ${pred1}.log
+rm ${pred1}.nopred
+r21=/net/mulan/disk2/yasheng/simulation2/SLMM/PT/r2_block${block}_her${herit}_cross${cross}_dist${dist}_ps${ps}_prop${prop}
+Rscript ${simpred} --pheno ${pred1}.profile --r2 ${r21}_p${p}.txt
+rm ${pred1}.profile
+done
+pbestf1=/net/mulan/disk2/yasheng/simulation2/SLMM/PT/pbest1_block${block}_her${herit}_cross${cross}_dist${dist}_ps${ps}_prop${prop}
+pbestf2=/net/mulan/disk2/yasheng/simulation2/SLMM/PT/pbest2_block${block}_her${herit}_cross${cross}_dist${dist}_ps${ps}_prop${prop}
+Rscript ${max1} --r2 ${r21}_p --pbest1 ${pbestf1}.txt --pbest2 ${pbestf2}.txt
+pbest1=`cat ${pbestf1}.txt`
+pbest2=`cat ${pbestf2}.txt`
+plink-1.9 --bfile ${bfilete} --score ${clump1}_p${pbest1}.txt 1 2 3 sum --out ${pred1}
+mv ${clump1}_p${pbest1}.txt ${clump1}_best.txt
+rm ${r21}_p*
+rm ${pred1}.log
+rm ${pred1}.txt
+rm ${pred2}.txt
+rm ${clump1}*
+````
 - SBLUP
 - LDpred
 - lasso (sample size = 2,000)
