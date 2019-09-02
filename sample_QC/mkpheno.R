@@ -145,28 +145,3 @@ write.table(pheno_ap, file = "/net/mulan/disk2/yasheng/phenotype_file/pheno_tot.
             quote = F, row.names = F, col.names = F)
 write.table(age, file = "/net/mulan/disk2/yasheng/phenotype_file/age.txt",
             quote = F, row.names = F, col.names = F)
-
-
-# library(rbgen)
-# neale <- fread("/net/mulan/home/yasheng/Biobank/data/QC/neale_pheno1_chr21.txt", 
-#               header = T) %>>% {data.frame(.)}
-# snp_position <- neale[c(113496: 113695), 1] %>>% 
-#              {str_split(., ":")} %>>%
-#              {laply(., function(a) a[2])} 
-# snp_code <- neale[c(113496: 113695), 2] 
-# 
-# summ <- function(snp_pos, snp_rs){
-#   
-#   snp_info <- data.frame(chromosome = "21", start = as.numeric(snp_pos), end = as.numeric(snp_pos))
-#   snp = bgen.load("/net/mulan/Biobank/rawdata/EGAD00010001225/001/ukb_imp_chr21_v2.bgen", snp_info)
-#   snp_exp <- snp$data[snp_rs,,][, 2]+snp$data[snp_rs,,][, 3]+snp$data[snp_rs,,][, 3]
-#   na_idx <- which(is.na(resid_pheno))
-#   fit1 <- lm(resid_pheno[-na_idx] ~ snp_exp[-na_idx])
-#   res1 <- coef(summary(fit1))[2, ]
-#   fit2 <- lm(pheno_scale ~ snp_exp + as.matrix(sqc.i[, c(12, 27:36)]))
-#   res2 <- coef(summary(fit2))[2, ]
-#   dosage <- sum(snp_exp[-na_idx]*resid_pheno[-na_idx])
-#   res <- c(dosage, res1, res2)
-#   return(res)
-# }
-
